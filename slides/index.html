@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Docker en production - Retour d'expérience</title>
+
+		<meta name="description" content="Un retour d'experience sur Docker en production">
+		<meta name="author" content="Gilles Dehaudt & Thibault Duchateau">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+    
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="#0084B4">
+					<h1>Docker en production</h1>
+					<h3>Retour d'expérience</h3>
+          
+          <aside class="notes">
+            <b>Qui :</b> Thibault<br>
+            <hr>
+            <ul>
+              <li>merci de nous accueillir</li>
+              <li>au début du projet, on aurait aimé avoir ce genre de présentation</li>
+            </ul>
+          </aside>
+				</section>
+
+        <section style="text-align: left;">
+					<h2>Qui sommes nous ?</h2>
+					<div>
+						<img src="images/tonton_round.png" style="border:0;background:none;float:left;width:100px;">
+            <div style="float:left;margin-left:20px;padding:20px;">
+              <span style="font-weight:bold;">Gilles Dehaudt</span>
+              <br>
+              System Engineer @ <a href="https://www.capensis.fr/">Capensis</a>
+              <br>
+              Admin sys Linux (N3) @ <a href="http://www.groupe3si.com/fr/groupe3si/3si-commerce">3SI Commerce</a>
+            </div>
+          </div>
+          <div style="clear:both;">
+            <br>
+            <img src="images/thibault_round.png" style="border:0;background:none;float:left;width:100px;">
+            <div style="float:left;margin-left:20px;padding:20px;">
+              <span style="font-weight:bold;">Thibault Duchateau</span>
+              <br>
+              Software Engineer @ <a href="http://www.davidson.fr/">Davidson Consulting</a>
+              <br>
+              Intégrateur @ <a href="http://www.groupe3si.com/fr/groupe3si/3si-commerce">3SI Commerce</a> 
+            </div>
+					</div>
+          
+          <aside class="notes">
+            <b>Qui :</b> Thibault / Gilles<br>     
+          </aside>
+				</section>
+        
+				<section>
+					<section>
+            <img width="600px" data-src="images/large_v-dark-trans.png" style="border:0;background:none;">
+            <p>Introduction à l'outil</p>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+					<section>
+						<p>Outil qui permet d’empaqueter une application et ses dépendances dans un <strong>conteneur</strong> virtuel qui pourra être exécuté sur n’importe quel serveur Linux <span class="fragment">(récent)</span></p>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+          <section>
+						<p>Développé par Docker, Inc + contributeurs</p>
+            <p class="fragment">Ecrit en <a href="https://golang.org/">Go</a></p>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+          <section data-background="#ffffff">
+						<p style="color:black ">S'inscrit dans la mouvance <strong>DevOps</strong></p>
+            <img src="images/devops.jpg" style="margin:0;border:0;background:none;box-shadow:none;">
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+				</section>
+
+				<section>
+          <section data-background="#3cb553">
+						<h2>Quel est le problème ?</h2>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+					<section>
+            <img src="images/docker.png">
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </section>
+          <section>
+						<h2>La solution</h2>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+            <img src="images/docker2.png">
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </section>
+          <section>
+						<h2>Dans l'IT</h2>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+            <img src="images/docker3.png">
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </section>
+				</section>
+
+				<section>
+          <section data-background="#3c62b5">
+					 <h2>Et par rapport à une VM ?</h2>
+           <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+          <section>
+					 <img src="images/vm-vs-conteneurs.png">
+           <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+				</section>
+
+				<section>
+          <section data-background="#3cb58f">
+            <h2>Quelques notions de base</h2>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+          </section>
+          <section>
+            <h2>Image</h2>
+            <ul>
+  						<li class="fragment">Ensemble de layers qui composent un filesystem</li>
+              <li class="fragment">Template de conteneur</li>
+              <li class="fragment">En lecture seule</li>
+  						<li class="fragment">Créé manuellement ou automatiquement via un <code>Dockerfile</code></li>
+  						<li class="fragment">Hiérarchisable</li>
+  					</ul>
+            <h3 class="fragment" style="margin-top:20px;color:#0084B4;">BUILD</h3>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+					<section>
+            <h2>Conteneur</h2>
+            <ul>
+  						<li class="fragment">Instancié à partir d'une image</li>
+  						<li class="fragment">Modifiable</li>
+  					</ul>
+            <h3 class="fragment" style="margin-top:20px;color:#0084B4;">RUN</h3>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+          <section>
+            <h2>Registry</h2>
+            <ul>
+  						<li class="fragment">Dépôt où sont stockées des images</li>
+              <li class="fragment">Dépôt à partir duquel les images sont distribuées</li>
+  						<li class="fragment">Public : <a href="https://hub.docker.com/">https://hub.docker.com/</a></li>
+              <li class="fragment">Privé : <a href="https://hub.docker.com/_/registry/">https://hub.docker.com/_/registry/</a></li>
+  					</ul>
+            <h3 class="fragment" style="margin-top:20px;color:#0084B4;">DISTRIBUTE</h3>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+					<section>
+            <img src="images/docker-lifecycle.png">
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+          </section>
+				</section>
+
+        <section>
+          <section data-background="#b5533c" data-background-transition="zoom">
+            <h2>Enjeux pour<br> 3SI Commerce</h2>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </section>
+					<section>
+            <h2>Banaliser les machines</h2>
+            <p class="fragment">Tout est inclus dans les conteneurs</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+            <h2>Améliorer l'efficacité des équipes</h2>
+            <p class="fragment">Installation et configuration de l'OS</p>
+            <p class="fragment">Installation des librairies</p>
+            <p class="fragment">Installation et configuration des middlewares</p>
+            <p class="fragment">Installation et configuration des applications</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+            <h2>Livraisons facilitées</h2>
+            <p class="fragment">Livrable transporté d'environnement en environnement</p>
+            <p class="fragment">Format de livrable unique</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+              <hr>
+              <ul>
+                <li>Format de livrable = image Docker</li>
+              </ul>
+            </aside>
+					</section>
+          <section>
+            <h2>Maintenir le niveau de service</h2>
+            <p class="fragment">Retours arrière simple</p>
+            <p class="fragment">Disponibilité / temps de réponse</p>
+            <p class="fragment">Transparent pour l'exploitation</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+				</section>
+        
+        <section>
+          <section data-background="#4d7e65" data-background-transition="zoom">
+            <h2>Contexte chez<br> 3SI Commerce</h2>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+          </section>
+					<section>
+            <h2>Environnement technique</h2>
+            <p class="fragment">RedHat / CentOS</p>
+            <p class="fragment">VMWare</p>
+            <p class="fragment">SAN</p>
+            <p class="fragment">Load balancer</p>
+            <p class="fragment">Oracle Weblogic</p>
+            <p class="fragment">Oracle Coherence</p>
+            <p class="fragment">N applications Java/JEE</p>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+				</section>
+        
+        <section>
+          <section data-background="./images/Firstmeet5.jpg">
+            <h2 style="background-color: #0084B4; border: 5px solid white;opacity: 0.8;">1ère rencontre</h2>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </section>
+          <section>
+            <h2>Docker, ça a l'air pas mal comme techno...</h2>
+            <p class="fragment">Découverte de l'écosystème</p>
+            <p class="fragment">Premiers tests</p>
+            <p class="fragment">Premiers POCs</p>
+            <p class="fragment">Premières surprises !</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+            <h2>Les conteneurs ne persistent pas les données après plusieurs <code>docker run</code></h2>
+            <aside class="notes">
+              <b>Qui :</b> Constat : Thibault, réponse : Gilles<br>
+            </aside>
+					</section>
+          <section>
+            <h2>Dockerfile : quésaco ?</h2>
+            <aside class="notes">
+              <b>Qui :</b> Constat : Thibault, réponse : Gilles<br>
+            </aside>
+					</section>
+          <section>
+            <h2>Volume = spécialisation de la VM ?</h2>
+            <aside class="notes">
+              <b>Qui :</b> Constat : Thibault, réponse : Gilles<br>
+            </aside>
+					</section>
+					<section>
+            <h2>Isolation réseau</h2>
+            <aside class="notes">
+              <b>Qui :</b> Constat : Thibault, réponse : Gilles<br>
+              <hr>
+              <p>= NAT par défaut
+              => maitrise de l'archicture globale</p>
+            </aside>
+					</section>
+				</section>
+        
+        <section>
+          <section data-background="images/brainstorming.jpg">
+            <h2 style="background-color: #0084B4; border: 5px solid white;opacity: 0.8;">1er brainstorming</h2>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+          </section>
+          <section data-background="images/custom-bigbang.jpg">
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+          </section>
+					<section>
+            <h2>Qu'est-ce qu'on en fait ?</h2>
+						<ul>
+              <li class="fragment">Simple conteneurisation : 1 application = 1 conteneur</li>
+              <li class="fragment">Le moins d'impact possible sur le réseau
+                <ul>
+                  <li>Pas de clustering (swarm)</li>
+                  <li>Haute dispo gérée par l'infra de virtualisation</li>
+                </ul>
+              </li>
+              <li class="fragment">Sur un périmètre limité : site web</li>
+              <li class="fragment">De la recette jusqu'à la prod (dev : <img src="images/tearyeyes.png" style="width:50px;margin:0;border:0;background:none;">)</li>
+            </ul>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+              <hr>
+              <p>
+                pas de clustering parce que les ips des containers change en fonction des déplacements => gestion particulière dans les loads balancer 
+	|-> qui dit pas de clustering dit besoin de garder la haute dispo au niveaux des machines et donc de l'infra de virtu
+              </p>
+            </aside>
+					</section>
+				</section>
+        
+        <section>
+          <section data-background="green">
+            <h2>Qui pour avancer ?</h2>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </section>
+					<section>
+						<h2>Une core team</h2>
+            <p class="fragment">Multi-compétences / multi-domaines</p>
+            <p class="fragment">Autonome</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+						<h2>Pas de chef ?</h2>
+            <p class="fragment">Si, en mode pare-feu</p>
+            <p class="fragment">Pour arbitrages et assistance hiérarchique</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+						<h2>Des contributeurs activés au besoin</h2>
+            <p class="fragment">Recette technique</p>
+            <p class="fragment">Supervision</p>
+            <p class="fragment">Réseau</p>
+            <p class="fragment">Pilotage</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+						<h2>Des sponsors</h2>
+            <p class="fragment">Reponsable Etudes</p>
+            <p class="fragment">Responsable Production</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+						<h2>De l'aide extérieure</h2>
+            <p>
+              <img src="images/thomas-clavier.jpg" style="width: 200px;">
+              <ul>
+                <li>Thomas Clavier, consultant DevOps freelance</li>
+                <li><a href="http://deliverous.com/">http://deliverous.com/</a> (1er hébergeur Docker français)</li>
+              </ul>
+            </p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+						<h2>De l'aide extérieure</h2>
+            <p>
+              <img src="images/docker-meetup-lille.png">
+              <ul>
+                <li>Docker Meetup Lille</li>
+                <li><a href="http://www.meetup.com/fr/docker-lille">http://www.meetup.com/fr/docker-lille</a></li>
+              </ul>
+            </p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+						<h2>De l'aide extérieure</h2>
+            <p>
+              <img src="images/logo-zenika.png" style="width: 300px;">
+              <ul>
+                <li>Cabinet de conseil, réalisation, formation et support informatique spécialisé dans l'Open Source et l'agilité</li>
+                <li>Formateur officiel Docker</li>
+              </ul>
+            </p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+				</section>
+        
+        <section>
+          <section data-background="#0084b4">
+            <h2>Comment avancer ?</h2>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </section>
+          <section>
+						<h2>Lot #1 Docker, ça marche</h2>
+            <ul>
+              <li class="fragment">Perf acceptables</li>
+              <li class="fragment">Ne nécessite pas de changement d'archi majeurs</li>
+            </ul>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+						<h2>Lot #2 Docker, c'est utile</h2>
+            <ul>
+              <li class="fragment">Ajout de machines</li>
+              <li class="fragment">Reconfiguration de machines</li>
+              <li class="fragment">Retours arrière</li>
+            </ul>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+						<h2>Lot #3 Docker, ça s'intègre dans notre environnement</h2>
+            <ul>
+              <li class="fragment">Supervision</li>
+              <li class="fragment">Logs</li>
+              <li class="fragment">Débogage</li>
+              <li class="fragment">Exploitabilité</li>
+            </ul>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+              <hr>
+              <p>
+                jalons 2/3 menés en //
+              </p>
+            </aside>
+					</section>
+          <section>
+						<h2>Lot #4 Docker, c'est en prod !</h2>
+            <ul>
+              <li class="fragment">Sur un périmètre suffisant pour en voir le bénéfice</li>
+            </ul>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+				</section>
+        
+        <section>
+          <section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+            <h2>Quelques mois plus tard ...</h2>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </section>
+				</section>
+        
+        <section data-background="images/yeah.gif" data-background-transition="zoom">
+          <h1>Docker est en production</h1>
+          <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+				</section>
+        
+        <section>
+          <section data-transition="slide" data-background="images/difficulte-tech.jpg">
+            <h2 style="background-color: #0084B4; border: 5px solid white;opacity: 0.8;">Difficultés techniques</h2>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+          </section>
+          <section>
+						<h2>Techno jeune</h2>
+            <p class="fragment">Documentation pas toujours exhaustive</p>
+            <p class="fragment">Ecosystème en constante évolution</p>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+          <section>
+						<h2>Intégration dans notre environnement</h2>
+            <p class="fragment">Problème rencontré avec Oracle Cohérence</p>
+            <p class="fragment">Nécessité de couper l'isolation réseau des conteneurs</p>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+          <section>
+						<h2>Gestion du paramétrage applicatif</h2>
+            <p class="fragment">Tous les paramétrages d'environnement embarqués dans l'image et switch au démarrage ?</p>
+            <p class="fragment">Data volume contenant les paramétrages ?</p>
+            <p class="fragment">Nouveau layer dédié au paramétrage ? <img class="fragment" src="images/ok.png" style="width:50px;border:0;background:none;margin:0;"></p>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+          <section>
+						<h2>Gestion de l'espace disque</h2>
+            <p class="fragment">Sur le registry d'entreprise</p>
+            <p class="fragment">Sur chaque machine hôte hébergeant un moteur Docker</p>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+        </section>
+        
+        <section>
+          <section data-transition="slide" data-background="images/difficulte-org.jpg">
+            <h2 style="background-color: #0084B4; border: 5px solid white;opacity: 0.8;">Difficultés organisationnelles</h2>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </section>
+          <section>
+						<h2>Vaincre les réticences</h2>
+            <p class="fragment">Présenter la démarche à tous les services avant de les solliciter</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+						<h2>Gestion des responsabilités</h2>
+            <p class="fragment">Qui fait quoi ?</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+            <p><img src="images/couches.png" style="width:600px;border:0;background:none;"></p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+						<h2>Remettre à plat l'existant</h2>
+            <p class="fragment">Redéfinition des process de livraison</p>
+            <p class="fragment">Redéfinition des process de déploiement</p>
+            <p class="fragment">Mise en commun des process</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+						<h2>Comment aller en prod ?</h2>
+            <p>Objectif principal :<br>sécuriser la MEP</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+						<h2>Comment sécuriser ?</h2>
+            <ul>
+              <li class="fragment">Doubler l'infrastructure</li>
+              <li class="fragment">Décorréler des actions réseau</li>
+              <li class="fragment">Décorréler de la MEP fonctionnelle</li>
+            </ul>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+						<h2>Arguments en notre faveur</h2>
+            <ul>
+              <li class="fragment">Arrivée de nouvelles machines</li>
+              <li class="fragment">OS incompatibles</li>
+            </ul>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+				</section>
+        
+        <section data-background="#4d7e65">
+          <h2>Conclusions</h2>
+          <aside class="notes">
+            <b>Qui :</b> Gilles<br>
+          </aside>
+        </section>
+        
+				<section>
+          <h2>#1 Banaliser les machines</h2>
+					<p class="fragment">
+            <img src="images/ok.png" style="width:100px;border:0;background:none;">
+          </p>
+          <aside class="notes">
+            <b>Qui :</b> Gilles<br>
+          </aside>
+				</section>
+        <section>
+          <section>
+            <h2>#2 Améliorer l'efficacité des équipes</h2>
+  					<p class="fragment">
+              <img src="images/ok.png" style="width:100px;border:0;background:none;">
+            </p>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+          </section>
+          <section>
+            <p>Facilite les montée de version de chaque composant</p>
+            <p>Facilite les changements de composant</p>
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+          </section>
+          <section>
+            <h2>SANS Docker, qui fait quoi ?</h2>
+            <img src="images/resp-avant.png" style="border:0;background:none;">
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+          <section>
+            <h2>AVEC Docker, qui fait quoi ?</h2>
+            <img src="images/resp-apres.png" style="border:0;background:none;">
+            <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+					</section>
+				</section>
+				<section>
+				  <section>
+            <h2>#3 Livraisons facilitées</h2>
+  					<p class="fragment">
+  					  <img src="images/ko.png" style="width:100px;border:0;background:none;margin-top:30px;">
+  					</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </section>
+          <section>
+            <h3>Nécessité de reconstruire l'image d'environnement en environnement</h3>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </section>
+          <section>
+            <h3>Solution envisagée</h3>
+            <ul>
+              <li class="fragment">Séparation claire entre propriétés applicatives et environnementales</li>
+              <li class="fragment">Utilisation de <b>Confd</b> pour générer tous les fichiers de configuration</li>
+              <li class="fragment">Data volume container</li>
+            </ul>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </section>
+          <section>
+            <img src="images/confd.png" style="border:0;width:800px;background:none;">
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </section>
+				</section>
+        <section>
+          <h2>#4 Maintenir le niveau de service</h2>
+					<p class="fragment">
+            <img src="images/ok.png" style="width:100px;border:0;background:none;">
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </p>
+				</section>
+        <section>
+          <section>
+            <h2>Mais aussi ...</h2>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+          </section>
+          <section>
+            <h2>Outils et méthodes communes</h2>
+						<p class="fragment">Référentiels</p>
+            <p class="fragment">Construction</p>
+            <p class="fragment">Livraison</p>
+            <p class="fragment">Déploiement</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+            <h2>Responsabilités clairement définies</h2>
+            <p class="fragment">Grâce à la hiérarchie des images</p>
+            <p class="fragment">S'accorde à l'organisation de l'entreprise</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+          <section>
+            <h2>Banalisation des MEP techniques</h2>
+						<p class="fragment">Test en cours de montée de version/changement des middlewares</p>
+            <p class="fragment">Impacts prévus en production : <span style="color:#009900; font-weight:bold;">MINEURS</span> :-)</p>
+            <aside class="notes">
+              <b>Qui :</b> Thibault<br>
+            </aside>
+					</section>
+				</section>
+        
+        <section data-state="displaypie">
+          <h2>Avec le recul...</h2>
+					<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+          <aside class="notes">
+              <b>Qui :</b> Gilles<br>
+            </aside>
+				</section>
+					
+				<section style="text-align: left;">
+					<h2>Merci pour votre attention</h2>
+					<div>
+						<img src="images/tonton_round.png" style="border:0;background:none;float:left;width:100px;">
+            <div style="float:left;margin-left:20px;padding:20px;">
+              <span style="font-weight:bold;">Gilles Dehaudt</span>
+              <br>
+              System Engineer @ <a href="https://www.capensis.fr/">Capensis</a>
+            </div>
+          </div>
+          <div style="clear:both;">
+            <br>
+            <img src="images/thibault_round.png" style="border:0;background:none;float:left;width:100px;">
+            <div style="float:left;margin-left:20px;padding:20px;">
+              <span style="font-weight:bold;">Thibault Duchateau</span>
+              <br>
+              Software Engineer @ <a href="http://www.davidson.fr/">Davidson Consulting</a>
+            </div>
+					</div>
+				</section>
+			</div>
+		</div>
+
+    <script src="lib/js/jquery-1.11.3.min.js"></script>
+    <script src="lib/js/highcharts.js"></script>
+    <script src="lib/js/highcharts-exporting.js"></script>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/print-pdf/print-pdf.js', async: true }
+				]
+			});
+      Reveal.addEventListener( 'displaypie', function( event ) {
+          $(function () {
+          /**
+ * Grid-light theme for Highcharts JS
+ * @author Torstein Honsi
+ */
+
+// Load the fonts
+Highcharts.createElement('link', {
+   href: '//fonts.googleapis.com/css?family=Dosis:400,600',
+   rel: 'stylesheet',
+   type: 'text/css'
+}, null, document.getElementsByTagName('head')[0]);
+
+Highcharts.theme = {
+   colors: ["#7cb5ec", "#f7a35c", "#90ee7e", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+      "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+   chart: {
+      backgroundColor: null,
+      style: {
+         fontFamily: "Dosis, sans-serif"
+      }
+   },
+   title: {
+      style: {
+         fontSize: '16px',
+         fontWeight: 'bold',
+         textTransform: 'uppercase'
+      }
+   },
+   tooltip: {
+      borderWidth: 0,
+      backgroundColor: 'rgba(219,219,216,0.8)',
+      shadow: false
+   },
+   legend: {
+      itemStyle: {
+         fontWeight: 'bold',
+         fontSize: '13px'
+      }
+   },
+   xAxis: {
+      gridLineWidth: 1,
+      labels: {
+         style: {
+            fontSize: '12px'
+         }
+      }
+   },
+   yAxis: {
+      minorTickInterval: 'auto',
+      title: {
+         style: {
+            textTransform: 'uppercase'
+         }
+      },
+      labels: {
+         style: {
+            fontSize: '12px'
+         }
+      }
+   },
+   plotOptions: {
+      candlestick: {
+         lineColor: '#404048'
+      }
+   },
+
+
+   // General
+   background2: '#F0F0EA'
+   
+};
+
+// Apply the theme
+Highcharts.setOptions(Highcharts.theme);
+          $('#container').highcharts({
+              chart: {
+                  plotBackgroundColor: null,
+                  plotBorderWidth: null,
+                  plotShadow: false,
+                  type: 'pie'
+              },
+              title: {
+                  text: ''
+              },
+              plotOptions: {
+                  series: {
+                      dataLabels: {
+                          enabled: true,
+                          formatter: function() {
+                              return this.point.name;
+                          },
+                          distance: -70,
+                          color:'white',
+                          style: {
+                            fontSize: "25px"
+                          }
+                      }
+                  }
+              },   
+              series: [{
+                  name: "Docker en prod",
+                  colorByPoint: true,
+                  data: [{
+                      name: "Organisation",
+                      y: 80
+                  }, {
+                      name: "Technique",
+                      y: 20
+                  }]
+              }]
+          });
+      });     
+      } );
+		</script>
+
+	</body>
+</html>
