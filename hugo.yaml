@@ -1,4 +1,4 @@
-baseURL: https://example.org/
+baseURL: https://tduchateau.github.io/
 languageCode: fr-FR
 title: KISSLAB
 
@@ -54,7 +54,7 @@ params:
   background: /images/site/background3.png
 
   # GitHub repo URL of your site
-  gitRepo: https://github.com/tduchateau/kisslab
+  gitRepo: https://github.com/tduchateau/tduchateau.github.io
 
   features:
     # Enable portfolio section
