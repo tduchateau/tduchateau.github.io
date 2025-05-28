@@ -12,7 +12,7 @@ skills:
     logo:
     summary: "Conception et animation de formations techniques ou méthodologiques avec ateliers pratiques adaptés au contexte de l’équipe."
 #    url: "https://kubernetes.io/"
-  - name: Conseil / consulting en Architecture
+  - name: Conseil / consulting en architecture
     logo:
     summary: "Accompagnement continu (ou ponctuel) pour concevoir ou refondre des architectures logicielles et cloud : choix technos, modèles de déploiement, patterns de résilience, gouvernance."
 #    url: "https://kubernetes.io/"
