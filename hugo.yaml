@@ -71,7 +71,7 @@ params:
 
     tags:
       enable: true
-      on_card: true
+      on_card: false
 
     darkMode:
       enable: true
