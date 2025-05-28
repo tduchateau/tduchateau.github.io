@@ -81,3 +81,7 @@ params:
     enable: true
     newsletter:
       enable: false
+
+caches:
+  images:
+    dir: :cacheDir/images
