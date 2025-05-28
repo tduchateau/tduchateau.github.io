@@ -10,17 +10,18 @@ section:
 skills:
   - name: Formation sur mesure
     logo:
-    summary: "Conception et animation de formations techniques ou méthodologiques avec ateliers pratiques adaptés au contexte de l’équipe."
+    summary: "Conception et animation de formations techniques ou méthodologiques avec ateliers pratiques adaptés au contexte de l'équipe."
 #    url: "https://kubernetes.io/"
   - name: Conseil / consulting en architecture
     logo:
-    summary: "Accompagnement continu (ou ponctuel) pour concevoir ou refondre des architectures logicielles et cloud : choix technos, modèles de déploiement, patterns de résilience, gouvernance."
+    summary: "Accompagnement ponctuel ou long-terme pour (re)designer vos architectures logicielle & cloud."
 #    url: "https://kubernetes.io/"
   - name: Coaching
     logo:
-    summary: "Mentorat individuel ou collectif pour faire monter en compétence les tech leads, instaurer de bonnes pratiques d’ingénierie (revues de code, tests, DevOps) et fluidifier la collaboration produit-technique."
+    summary: "Mentorat individuel ou collectif pour monter en compétence, ancrer les bonnes pratiques d'équipe et tisser des liens solides entre produit et tech"
+
 #    url: "https://kubernetes.io/"
   - name: Audit
     logo:
-    summary: "Analyse de l’architecture logicielle ou cloud existante, identification des points de friction (scalabilité, dette technique, coûts), et livrable de recommandations concrètes priorisées."
+    summary: "Analyse de l'architecture logicielle ou cloud existante, identification des points de friction (scalabilité, dette technique, coûts), et livrable de recommandations concrètes priorisées."
 #    url: "https://kubernetes.io/"
