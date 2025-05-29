@@ -2,26 +2,24 @@ section:
   name: Prestations
   id: skills
   enable: true
-  weight: 2
+  weight: 1
   showOnNavbar: true
   # Can optionally hide the title in sections
   # hideTitle: true
 
 skills:
   - name: Formation sur mesure
-    logo:
+    logo: /images/sections/skills/graduation-cap-solid.svg
     summary: "Conception et animation de formations techniques ou méthodologiques avec ateliers pratiques adaptés au contexte de l'équipe."
-#    url: "https://kubernetes.io/"
+
   - name: Conseil / consulting en architecture
-    logo:
+    logo: /images/sections/skills/puzzle.svg
     summary: "Accompagnement ponctuel ou long-terme pour (re)designer vos architectures logicielle & cloud."
-#    url: "https://kubernetes.io/"
+
   - name: Coaching
-    logo:
+    logo: /images/sections/skills/users.svg
     summary: "Mentorat individuel ou collectif pour monter en compétence, ancrer les bonnes pratiques d'équipe et tisser des liens solides entre produit et tech"
 
-#    url: "https://kubernetes.io/"
   - name: Audit
-    logo:
+    logo: /images/sections/skills/chart-line-solid.svg
     summary: "Analyse de l'architecture logicielle ou cloud existante, identification des points de friction (scalabilité, dette technique, coûts), et livrable de recommandations concrètes priorisées."
-#    url: "https://kubernetes.io/"
