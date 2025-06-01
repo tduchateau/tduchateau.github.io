@@ -1,4 +1,4 @@
-baseURL: https://tduchateau.github.io/
+baseURL: https://kisslab.tech/
 languageCode: fr-FR
 title: KISSLAB
 
@@ -57,6 +57,7 @@ params:
   gitRepo: https://github.com/tduchateau/tduchateau.github.io
 
   features:
+
     analytics:
       enable: true
       services:
