@@ -57,6 +57,12 @@ params:
   gitRepo: https://github.com/tduchateau/tduchateau.github.io
 
   features:
+    analytics:
+      enable: true
+      services:
+        google:
+          id: G-GBN86LC9K4
+
     # Enable portfolio section
     portfolio:
       enable: true
