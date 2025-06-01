@@ -49,6 +49,7 @@ outputs:
 # Enable global emoji support
 enableEmoji: true
 
+googleAnalytics: "G-GBN86LC9K4"
 services:
   googleAnalytics:
     id: G-GBN86LC9K4
