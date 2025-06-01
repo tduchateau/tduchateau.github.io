@@ -49,6 +49,10 @@ outputs:
 # Enable global emoji support
 enableEmoji: true
 
+services:
+  googleAnalytics:
+    id: G-GBN86LC9K4
+
 # Site parameters
 params:
   background: /images/site/background3.png
@@ -59,7 +63,7 @@ params:
   features:
 
     analytics:
-      enable: true
+      enable: false
       services:
         google:
           id: G-GBN86LC9K4
