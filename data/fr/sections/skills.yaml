@@ -8,18 +8,26 @@ section:
   # hideTitle: true
 
 skills:
-  - name: Formation sur mesure
+  - name: Développement backend Java
+    logo: /images/sections/skills/java-brands.svg
+    summary: "Conception et développement de services backend."
+
+  - name: Formation
     logo: /images/sections/skills/graduation-cap-solid.svg
     summary: "Conception et animation de formations techniques ou méthodologiques avec ateliers pratiques adaptés au contexte de l'équipe."
+
+  - name: Coaching
+    logo: /images/sections/skills/users.svg
+    summary: "Mentorat individuel ou collectif pour monter en compétence, ancrer les bonnes pratiques d'équipe et tisser des liens solides entre produit et tech."
+
+  - name: Audit
+    logo: /images/sections/skills/chart-line-solid.svg
+    summary: "Analyse de l'architecture logicielle ou cloud existante, identification des points de friction (scalabilité, dette technique, coûts), et livrable de recommandations concrètes priorisées."
 
   - name: Conseil / consulting en architecture
     logo: /images/sections/skills/puzzle.svg
     summary: "Accompagnement ponctuel ou long-terme pour (re)designer vos architectures logicielle & cloud."
 
-  - name: Coaching
-    logo: /images/sections/skills/users.svg
-    summary: "Mentorat individuel ou collectif pour monter en compétence, ancrer les bonnes pratiques d'équipe et tisser des liens solides entre produit et tech"
-
-  - name: Audit
-    logo: /images/sections/skills/chart-line-solid.svg
-    summary: "Analyse de l'architecture logicielle ou cloud existante, identification des points de friction (scalabilité, dette technique, coûts), et livrable de recommandations concrètes priorisées."
+  - name: Autre chose
+    logo: /images/sections/skills/question-solid.svg
+    summary: "Vous pouvez me contacter en m'envoyant un email à l'adresse indiquée tout en bas :arrow_heading_down:"

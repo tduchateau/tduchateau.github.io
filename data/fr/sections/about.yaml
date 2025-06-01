@@ -20,12 +20,15 @@ designation: Ingénieur logiciel indépendant
 
 # a summary about you
 summary: |
-  Ingénieur logiciel passionné, fort de plus de 15 ans d'expérience.
-  Après un passage chez Capgemini et Davidson SI Nord, j'ai co-fondé en 2016 l'ESN NoConsulting, une structure à taille humaine basée dans le Nord. 
-  
-  J'ai accompagné aussi bien grands groupes que startups, tout en enseignant à l'université et en contribuant à des projets open source. 
-  
-  Indépendant depuis 2024, j'accompagne désormais mes clients en conseil, développement et architecture logicielle tout en partageant activement mon expertise.
+    Ingénieur logiciel passionné, fort de plus de 15 ans d'expérience, j'ai évolué au sein de structures comme Capgemini et Davidson SI Nord avant de co-fonder, en 2016, l'ESN [NoConsulting](https://www.linkedin.com/company/noconsulting/).
+    
+    Tout au long de mon parcours, j'ai accompagné aussi bien des grands groupes que des startups, en endossant plusieurs rôles : développeur, formateur, architecte, manager, tech lead, recruteur, CTO et même entrepreneur, à l'occasion d'une tentative de création de startup aussi exigeante qu'enrichissante. J'ai également enseigné à l'université et suis à l'origine d'un [projet open source](https://github.com/dandelion) dont j'ai été le créateur et lead developer.
+    
+    Au fil des années, j'ai travaillé sur une grande variété de stacks et de problématiques : développement d'applications web, d'applicationsn mobiles natives & hybrides, conception d'APIs, de CLIs, mise en place d'instrastructures cloud (Infrastructure as Code), pipelines CI/CD, etc.
+    
+    Aujourd'hui indépendant, j'accompagne mes clients en conseil, développement et architecture logicielle.   
+    Mon domaine d'expertise principal se concentre sur le développement backend en Java / Spring.  
+    J'attache une attention particulière à la **qualité du code**, à la **transmission des connaissances** et à l'**impact des solutions**. Bref, ce qu'on regroupe aujourd'hui sous le nom de _Software Craftsmanship_ :wink:.
 
 # your social links
 # give as many as you want. use font-awesome for the icons.
@@ -40,11 +43,11 @@ socialLinks:
 
   - name: Stackoverflow
     icon: "fab fa-stack-overflow"
-    url: "#"
+    url: "https://stackoverflow.com/users/1358736/tduchateau"
 
   - name: LinkedIn
     icon: "fab fa-linkedin"
-    url: "#"
+    url: "https://www.linkedin.com/in/tduchateau/"
 
 #  - name: Twitter
 #    icon: "fab fa-twitter"
